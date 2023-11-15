@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "simple_shell.h"
 
 /**
  * **string_split - make an input str to words
@@ -8,7 +8,7 @@
  */
 char **string_split(char *str, char *c)
 {
-	int t, k, j, m, wordnum = 0;
+	int t, k, j, n, wordnum = 0;
 	char **p;
 
 	if (str == NULL || str[0] == 0)
@@ -63,9 +63,8 @@ char **string2_split(char *str, char c)
 	if (str == NULL || str[0] == 0)
 		return (NULL);
 	for (t = 0; str[t] != '\0'; t++)
-		if ((str[t] != c && str[t + 1] == c)
-		|| (str[t] != c && !str[t + 1]
-		|| str[t + 1] == c))
+		if ((str[t] != c && str[t + 1] == c) ||
+			(str[t] != c && !str[t + 1]) || str[t + 1] == c)
 				wordnum++;
 	if (wordnum == 0)
 		return (NULL);

@@ -98,15 +98,15 @@ void find_command(info_t *info)
 	if (!j)
 		return;
 
-	pth = findout_path(info, get_env(info, "PATH="), info->argv[0]);
+	pth = findout_path(info, env_get(info, "PATH="), info->argv[0]);
 	if (pth)
 	{
-		info->pth = path;
+		info->pth = pth;
 		seperate_cmd(info);
 	}
 	else
 	{
-		if ((inter_active(info) || get_env(info, "PATH=")
+		if ((inter_active(info) || env_get(info, "PATH=")
 					|| info->argv[0][0] == '/') && verify_command(info, info->argv[0]))
 			seperate_cmd(info);
 		else if (*(info->arg) != '\n')
@@ -135,7 +135,7 @@ void seperate_cmd(info_t *info)
 	}
 	if (cpid == 0)
 	{
-		if (execve(info->pth, info->argv, get_env(info)) == -1)
+		if (execve(info->pth, info->argv, envn_get(info)) == -1)
 		{
 			rls_information(info, 1);
 			if (errno == EACCES)

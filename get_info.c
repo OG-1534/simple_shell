@@ -41,7 +41,7 @@ void info_plc(info_t *info, char **av)
 		info->argc = t;
 
 		chg_als(info);
-		chg_vars(info);
+		variable_change(info);
 	}
 }
 

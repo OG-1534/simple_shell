@@ -54,18 +54,18 @@ int alpha_check(int d)
 
 int atom_izer(char *p)
 {
-	int t, sign = 1, flag = 0, output;
 	unsigned int result = 0;
+	int t, sign = 1, flag = 0, output;
 
-	for (t = 0;  s[t] != '\0' && flag != 2; t++)
+	for (t = 0;  p[t] != '\0' && flag != 2; t++)
 	{
-		if (s[t] == '-')
+		if (p[t] == '-')
 			sign *= -1;
-		if (s[t] >= '0' && s[t] <= '9')
+		if (p[t] >= '0' && p[t] <= '9')
 		{
 			flag = 1;
 			result *= 10;
-			result += (s[t] - '0');
+			result += (p[t] - '0');
 		}
 		else if (flag == 1)
 			flag = 2;

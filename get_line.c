@@ -18,7 +18,7 @@ ssize_t inst_buffer(info_t *info, char **buf, size_t *len)
 	{
 		free(*buf);
 		*buf = NULL;
-		signal(SIGINT, sigintOperator);
+		signal(SIGINT, Operator_signt);
 #if USE_GETLINE
 		q = getline(buf, &len_p, stdin);
 #else
@@ -57,7 +57,7 @@ ssize_t inpt_ftch(info_t *info)
 	char **buf_p = &(info->arg), *s;
 
 	put_char(BUF_FLUSH);
-	q = insert_buf(info, &buf, &len);
+	q = inst_buffer(info, &buf, &len);
 	if (q == -1)
 		return (-1);
 	if (len)
@@ -65,7 +65,7 @@ ssize_t inpt_ftch(info_t *info)
 		k = t;
 		s = buf + t;
 
-		test_chain(info, buf, &k, t, len);
+		chain_tst(info, buf, &k, t, len);
 		while (k < len)
 		{
 			if (chain_confirm(info, buf, &k))
@@ -81,7 +81,7 @@ ssize_t inpt_ftch(info_t *info)
 		}
 
 		*buf_p = s;
-		return (str_len(p));
+		return (str_len(s));
 	}
 
 	*buf_p = buf;
@@ -130,11 +130,11 @@ int fetch_line(info_t *info, char **ptr, size_t *length)
 	if (t == len)
 		t = len = 0;
 
-	q = scan_buffer(info, buf, &len);
+	q = buf_scan(info, buf, &len);
 	if (q == -1 || (q == 0 && len == 0))
 		return (-1);
 
-	d = str_char(buf + i, '\n');
+	d = str_char(buf + t, '\n');
 	j = d ? 1 + (unsigned int)(d - buf) : len;
 	new_p = re_alloc(s, p, p ? p + j : j + 1);
 	if (!new_p)
@@ -143,7 +143,7 @@ int fetch_line(info_t *info, char **ptr, size_t *length)
 	if (p)
 		strn_cat(new_p, buf + t, j - t);
 	else
-		strn_cpy(new_p, buf + t, j - t + 1);
+		strn_copy(new_p, buf + t, j - t + 1);
 
 	p += j - t;
 	t = j;

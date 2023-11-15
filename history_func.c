@@ -43,7 +43,7 @@ int scan_history(info_t *info)
 	if (f_d == -1)
 		return (0);
 	if (!fstat(f_d, &s_t))
-		fsize = s_t.st_size;
+		filesize = s_t.st_size;
 	if (filesize < 2)
 		return (0);
 	buf = malloc(sizeof(char) * (filesize + 1));
@@ -128,7 +128,7 @@ char *get_history_file(info_t *info)
 {
 	char *buf, *dir;
 
-	dir = get_env(info, "HOME=");
+	dir = env_get(info, "HOME=");
 	if (!dir)
 		return (NULL);
 	buf = malloc(sizeof(char) * (str_len(dir) + str_len(HIST_FILE) + 2));

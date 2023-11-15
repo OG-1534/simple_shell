@@ -30,7 +30,7 @@ int variable_change(info_t *info)
 		if (info->argv[t][0] != '$' || !info->argv[t][1])
 			continue;
 
-		if (!str_comp(info->argv[i], "$?"))
+		if (!str_comp(info->argv[t], "$?"))
 		{
 			str_change(&(info->argv[t]),
 				str_dup(num_change(info->state, 10, 0)));
@@ -49,7 +49,7 @@ int variable_change(info_t *info)
 				str_dup(str_char(node->str, '=') + 1));
 			continue;
 		}
-		str_change(&info->argv[i], str_dup(""));
+		str_change(&info->argv[t], str_dup(""));
 
 	}
 	return (0);

@@ -7,7 +7,7 @@
   */
 int exodus_new(info_t *info)
 {
-	int scan_ exit;
+	int scan_exit;
 
 	if (info->argv[1])
 	{
@@ -42,24 +42,24 @@ int new_cd(info_t *info)
 		puts_("TODO: >>getcwd failure emsg here<<\n");
 	if (!info->argv[1])
 	{
-		dir = get_env(info, "HOME=");
+		dir = env_get(info, "HOME=");
 		if (!dir)
 			chdir_ret = /* TODO: what is it? */
-				chdir((dir = get_env(info, "PWD=")) ? dir : "/");
+				chdir((dir = env_get(info, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
 	}
 	else if (str_comp(info->argv[1], "-") == 0)
 	{
-		if (!get_env(info, "OLDPWD="))
+		if (!env_get(info, "OLDPWD="))
 		{
 			puts_(p);
 			put_char('\n');
 			return (1);
 		}
-		puts_(get_env(info, "OLDPWD=")), put_char('\n');
+		puts_(env_get(info, "OLDPWD=")), put_char('\n');
 		chdir_ret =
-			chdir((dir = get_env(info, "OLDPWD=")) ? dir : "/");
+			chdir((dir = env_get(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
 		chdir_ret = chdir(info->argv[1]);
@@ -70,7 +70,7 @@ int new_cd(info_t *info)
 	}
 	else
 	{
-		setenv_(info, "OLDPWD", get_env(info, "PWD="));
+		setenv_(info, "OLDPWD", env_get(info, "PWD="));
 		setenv_(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);

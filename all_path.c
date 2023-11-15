@@ -12,10 +12,10 @@ int verify_command(info_t *info, char *pth)
 	struct stat s_t;
 
 	(void)info;
-	if (!pth || stat(pth, &st))
+	if (!pth || stat(pth, &s_t))
 		return (0);
 
-	if (st.st_mode & S_IFREG)
+	if (s_t.st_mode & S_IFREG)
 	{
 		return (1);
 	}
@@ -58,7 +58,7 @@ char *findout_path(info_t *info, char *pathstr, char *command)
 		return (NULL);
 	if ((str_len(command) > 2) && starting_string(command, "./"))
 	{
-		if (confirm_command(info, commmand))
+		if (verify_command(info, command))
 			return (command);
 	}
 	while (1)
@@ -73,7 +73,7 @@ char *findout_path(info_t *info, char *pathstr, char *command)
 				str_cat(pth, "/");
 				str_cat(pth, command);
 			}
-			if (confirm_command(info, pth))
+			if (verify_command(info, pth))
 				return (pth);
 			if (!pathstr[t])
 				break;

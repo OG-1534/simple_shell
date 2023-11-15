@@ -34,7 +34,7 @@ char *strn_copy(char *dst, char *src, int n)
 	t = 0;
 	while (src[t] != '\0' && t < n - 1)
 	{
-		dest[t] = src[t];
+		dst[t] = src[t];
 		t++;
 	}
 	if (t < n)
