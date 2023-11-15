@@ -36,10 +36,6 @@
 #define HIST_MAX     4096
 #define HIST_FILE       ".simple_shell_history"
 
-#define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, NULL, NULL, NULL, NULL, \
-	0, 0, 0}
-
 extern char **envn;
 
 /**
@@ -110,6 +106,10 @@ typedef struct builtin
 	char *type;
 	int (*func)(info_t *);
 } built_in_table;
+
+#define INFO_INIT \
+{NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, NULL, NULL, NULL, NULL, \
+	0, 0, 0}
 
 /* prototypes environment functions */
 int envn_list_population(info_t *info);
