@@ -87,7 +87,7 @@ typedef struct var_info
 	char *f_name;
 	char **argv;
 	int argc;
-	list_t alias;
+	list_t *alias;
 	int num_err;
 	char **command_buff;
 	int command_buff_type;
