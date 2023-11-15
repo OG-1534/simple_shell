@@ -54,7 +54,7 @@ int our_hsh(info_t *info, char **av)
 int action_built_in(info_t *info)
 {
 	int t, builtin_retriver = -1;
-	built_in_table btable[] = {
+	built_in_table builtintbl[] = {
 		{"exit", exodus_new},
 		{"env", my_env},
 		{"help", aid_help},
@@ -65,11 +65,11 @@ int action_built_in(info_t *info)
 		{"alias", new_alias},
 		{NULL, NULL}
 	};
-	for (t = 0; btable[t].type; t++)
-		if (str_comp(info->argv[0], btable[t].type) == 0)
+	for (t = 0; builtintbl[t].type; t++)
+		if (str_comp(info->argv[0], builtintbl[t].type) == 0)
 		{
 			info->count_line++;
-			builtin_retriver = btable[t].func(info);
+			builtin_retriver = builtintbl[t].func(info);
 			break;
 		}
 	return (builtin_retriver);
