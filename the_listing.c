@@ -64,7 +64,7 @@ list_t *atch_start_node(list_t **head, const char *str, int num)
 	nw_head->num = num;
 	if (str)
 	{
-		nw_head->str = _str_dup(str);
+		nw_head->str = str_dup(str);
 		if (!nw_head->str)
 		{
 			free(nw_head);
@@ -99,7 +99,7 @@ list_t *atch_node(list_t **head, const char *str, int num)
 	nw_node->num = num;
 	if (str)
 	{
-		nw_node->str = _str_dup(str);
+		nw_node->str = str_dup(str);
 		if (!nw_node->str)
 		{
 			free(nw_node);

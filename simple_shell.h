@@ -43,17 +43,6 @@
 extern char **envn;
 
 /**
- *struct builtin - builtin environ checker
- *@type: checked character
- *@func: checked function
- */
-typedef struct builtin
-{
-	char *type;
-	int (*func)(info_t *);
-} built_in_table;
-
-/**
  * struct str_list - linked list function
  * @str: string in linked list
  * @num: field number
@@ -111,11 +100,22 @@ typedef struct var_info
 	char *arg;
 } info_t;
 
+/**
+ *struct builtin - builtin environ checker
+ *@type: checked character
+ *@func: checked function
+ */
+typedef struct builtin
+{
+	char *type;
+	int (*func)(info_t *);
+} built_in_table;
+
 /* prototypes environment functions */
 int envn_list_population(info_t *info);
 int unset_env(info_t *info);
 int set_env(info_t *info);
-char env_get(info_t *info, const char *name);
+char *env_get(info_t *info, const char *name);
 int my_env(info_t *info);
 
 /* prototypes for get env functions */

@@ -64,8 +64,8 @@ char **string2_split(char *str, char c)
 		return (NULL);
 	for (t = 0; str[t] != '\0'; t++)
 		if ((str[t] != c && str[t + 1] == c) ||
-			(str[t] != c && !str[t + 1]) || str[t + 1] == c)
-				wordnum++;
+				(str[t] != c && !str[t + 1]) || str[t + 1] == c)
+			wordnum++;
 	if (wordnum == 0)
 		return (NULL);
 	p = malloc((1 + wordnum) * sizeof(char *));
