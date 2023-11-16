@@ -96,6 +96,7 @@ typedef struct var_info
 	char *arg;
 } info_t;
 
+
 /**
  *struct builtin - builtin environ checker
  *@type: checked character
@@ -107,9 +108,7 @@ typedef struct builtin
 	int (*func)(info_t *);
 } built_in_table;
 
-#define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, NULL, NULL, NULL, NULL, \
-	0, 0, 0}
+#define INFO_INIT (int)0 /
 
 /* prototypes environment functions */
 int envn_list_population(info_t *info);
