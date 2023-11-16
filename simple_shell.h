@@ -108,7 +108,7 @@ typedef struct builtin
 	int (*func)(info_t *);
 } built_in_table;
 
-#define INFO_INIT (int)0 /
+#define INFO_INIT int{0}
 
 /* prototypes environment functions */
 int envn_list_population(info_t *info);
