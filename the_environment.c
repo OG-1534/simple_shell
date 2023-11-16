@@ -12,8 +12,8 @@ int envn_list_population(info_t *info)
 	list_t *node = NULL;
 	size_t a;
 
-	for (a = 0; envn[a]; a++)
-		atch_node(&node, envn[a], 0);
+	for (a = 0; environ[a]; a++)
+		atch_node(&node, environ[a], 0);
 	info->env = node;
 	return (0);
 

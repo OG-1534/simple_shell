@@ -36,7 +36,7 @@
 #define HIST_MAX     4096
 #define HIST_FILE       ".simple_shell_history"
 
-extern char **envn;
+extern char **environ;
 
 /**
  * struct str_list - linked list function
@@ -57,7 +57,7 @@ list_t;
  *
  * @pth: cmd path
  * @env_chg: changed environment
- * @envn: environment
+ * @environ: environment
  * @state: executed cmd state
  * @count_hist: history count
  * @read_fd: file descriptor to read from
@@ -78,7 +78,7 @@ typedef struct var_info
 {
 	char *pth;
 	int env_chg;
-	char **envn;
+	char **environ;
 	int state;
 	int count_hist;
 	int read_fd;
@@ -108,7 +108,8 @@ typedef struct builtin
 	int (*func)(info_t *);
 } built_in_table;
 
-#define INFO_INIT int{0}
+#define INFO_INIT \
+{NULL, 0, NULL, 0, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, 0, 0, 0, NULL}
 
 /* prototypes environment functions */
 int envn_list_population(info_t *info);

@@ -67,8 +67,8 @@ void rls_information(info_t *info, int all)
 			rls_ls(&(info->history));
 		if (info->alias)
 			rls_ls(&(info->alias));
-		str_array(info->envn);
-			info->envn = NULL;
+		str_array(info->environ);
+			info->environ = NULL;
 		free_me((void **)info->command_buff);
 		if (info->read_fd > 2)
 			close(info->read_fd);

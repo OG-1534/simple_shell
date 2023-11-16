@@ -9,13 +9,13 @@
 
 char **envn_get(info_t *info)
 {
-	if (!info->envn || info->env_chg)
+	if (!info->environ || info->env_chg)
 	{
-		info->envn = change_list(info->env);
+		info->environ = change_list(info->env);
 		info->env_chg = 0;
 	}
 
-	return (info->envn);
+	return (info->environ);
 }
 
 /**
