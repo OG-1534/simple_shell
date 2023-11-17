@@ -32,12 +32,12 @@ int our_hsh(info_t *info, char **av)
 	}
 	document_hist(info);
 	rls_information(info, 1);
-	if (!inter_active(info) && info->state)
-		exit(info->state);
+	if (!inter_active(info) && info->status)
+		exit(info->status);
 	if (ret_built_in == -2)
 	{
 		if (info->num_err == -1)
-			exit(info->state);
+			exit(info->status);
 		exit(info->num_err);
 	}
 	return (ret_built_in);
@@ -84,9 +84,9 @@ int action_built_in(info_t *info)
 void find_command(info_t *info)
 {
 	int t, j;
-	char *pth = NULL;
+	char *path = NULL;
 
-	info->pth = info->argv[0];
+	info->path = info->argv[0];
 	if (info->countline_flag == 1)
 	{
 		info->count_line++;
@@ -98,10 +98,10 @@ void find_command(info_t *info)
 	if (!j)
 		return;
 
-	pth = findout_path(info, env_get(info, "PATH="), info->argv[0]);
-	if (pth)
+	path = findout_path(info, env_get(info, "PATH="), info->argv[0]);
+	if (path)
 	{
-		info->pth = pth;
+		info->path = path;
 		seperate_cmd(info);
 	}
 	else
@@ -111,7 +111,7 @@ void find_command(info_t *info)
 			seperate_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
-			info->state = 127;
+			info->status = 127;
 			output_error(info, "not found\n");
 		}
 	}
@@ -135,7 +135,7 @@ void seperate_cmd(info_t *info)
 	}
 	if (cpid == 0)
 	{
-		if (execve(info->pth, info->argv, envn_get(info)) == -1)
+		if (execve(info->path, info->argv, envn_get(info)) == -1)
 		{
 			rls_information(info, 1);
 			if (errno == EACCES)
@@ -146,11 +146,11 @@ void seperate_cmd(info_t *info)
 	}
 	else
 	{
-		wait(&(info->state));
-		if (WIFEXITED(info->state))
+		wait(&(info->status));
+		if (WIFEXITED(info->status))
 		{
-			info->state = WEXITSTATUS(info->state);
-			if (info->state == 126)
+			info->status = WEXITSTATUS(info->status);
+			if (info->status == 126)
 				output_error(info, "Access denied\n");
 		}
 	}

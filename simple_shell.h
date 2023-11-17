@@ -53,12 +53,12 @@ typedef struct str_list
 list_t;
 
 /**
- * struct var_info - arguments to pipe to func.
+ * struct passinfo - arguments to pipe to func.
  *
- * @pth: cmd path
+ * @path: cmd path
  * @env_chg: changed environment
  * @environ: environment
- * @state: executed cmd state
+ * @status: executed cmd status
  * @count_hist: history count
  * @read_fd: file descriptor to read from
  * @history: node for history
@@ -68,18 +68,18 @@ list_t;
  * @argc: argument count
  * @alias: node for alias
  * @num_err: exit error
- * @command_buff: command buffer pointer
- * @command_buff_type: command type
+ * @cmd_buf: command buffer pointer
+ * @cmd_buf_type: command type
  * @count_line: counts errors
  * @countline_flag: input count
  * @arg: arguments
  */
-typedef struct var_info
+typedef struct passinfo
 {
-	char *pth;
+	char *path;
 	int env_chg;
 	char **environ;
-	int state;
+	int status;
 	int count_hist;
 	int read_fd;
 	list_t *history;
@@ -89,8 +89,8 @@ typedef struct var_info
 	int argc;
 	list_t *alias;
 	int num_err;
-	char **command_buff;
-	int command_buff_type;
+	char **cmd_buf;
+	int cmd_buf_type;
 	unsigned int count_line;
 	int countline_flag;
 	char *arg;

@@ -3,7 +3,7 @@
 /**
   * exodus_new - exiting the shell
   * @info: struct pointer with args
-  * Return: shell exit state
+  * Return: shell exit status
   */
 int exodus_new(info_t *info)
 {
@@ -14,7 +14,7 @@ int exodus_new(info_t *info)
 		scan_exit = atoi_err(info->argv[1]);
 		if (scan_exit == -1)
 		{
-			info->state = 2;
+			info->status = 2;
 			output_error(info, "Illegal number: ");
 			output_str(info->argv[1]);
 			output_char('\n');

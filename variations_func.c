@@ -33,7 +33,7 @@ int variable_change(info_t *info)
 		if (!str_comp(info->argv[t], "$?"))
 		{
 			str_change(&(info->argv[t]),
-				str_dup(num_change(info->state, 10, 0)));
+				str_dup(num_change(info->status, 10, 0)));
 			continue;
 		}
 		if (!str_comp(info->argv[t], "$$"))
@@ -69,17 +69,17 @@ void chain_tst(info_t *info, char *buf, size_t *s, size_t t, size_t len)
 {
 	size_t k = *s;
 
-	if (info->command_buff_type == CMD_AND)
+	if (info->cmd_buf_type == CMD_AND)
 	{
-		if (info->state)
+		if (info->status)
 		{
 			buf[t] = 0;
 			k = len;
 		}
 	}
-	if (info->command_buff_type == CMD_OR)
+	if (info->cmd_buf_type == CMD_OR)
 	{
-		if (!info->state)
+		if (!info->status)
 		{
 			buf[t] = 0;
 			k = len;
@@ -105,18 +105,18 @@ int chain_confirm(info_t *info, char *buf, size_t *s)
 	{
 		buf[k] = 0;
 		k++;
-		info->command_buff_type = CMD_OR;
+		info->cmd_buf_type = CMD_OR;
 	}
 	else if (buf[k] == '&' && buf[k + 1] == '&')
 	{
 		buf[k] = 0;
 		k++;
-		info->command_buff_type = CMD_AND;
+		info->cmd_buf_type = CMD_AND;
 	}
 	else if (buf[k] == ';') /* located at the end of command */
 	{
 		buf[k] = 0; /* replaced null */
-		info->command_buff_type = CMD_CHAIN;
+		info->cmd_buf_type = CMD_CHAIN;
 	}
 	else
 		return (0);

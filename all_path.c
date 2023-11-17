@@ -1,18 +1,18 @@
 #include "simple_shell.h"
 /**
- * verify_command - ascertain whether a file in a pth is executable
+ * verify_command - ascertain whether a file in a path is executable
  *
  * @info: structure pointer
- * @pth: file path.
+ * @path: file path.
  *
  * Return: 1 on success or 0 on failure
  */
-int verify_command(info_t *info, char *pth)
+int verify_command(info_t *info, char *path)
 {
 	struct stat s_t;
 
 	(void)info;
-	if (!pth || stat(pth, &s_t))
+	if (!path || stat(path, &s_t))
 		return (0);
 
 	if (s_t.st_mode & S_IFREG)
@@ -42,7 +42,7 @@ char *character_clone(char *pathstr, int strt, int stp)
 }
 
 /**
- * findout_path - detect command pth in a str
+ * findout_path - detect command path in a str
  *
  * @info: structure pointer
  * @pathstr: directory of the string path
@@ -52,7 +52,7 @@ char *character_clone(char *pathstr, int strt, int stp)
 char *findout_path(info_t *info, char *pathstr, char *command)
 {
 	int t = 0, present_post = 0;
-	char *pth;
+	char *path;
 
 	if (!pathstr)
 		return (NULL);
@@ -65,16 +65,16 @@ char *findout_path(info_t *info, char *pathstr, char *command)
 	{
 		if (!pathstr[t] || pathstr[t] == ':')
 		{
-			pth = character_clone(pathstr, present_post, t);
-			if (!*pth)
-				str_cat(pth, command);
+			path = character_clone(pathstr, present_post, t);
+			if (!*path)
+				str_cat(path, command);
 			else
 			{
-				str_cat(pth, "/");
-				str_cat(pth, command);
+				str_cat(path, "/");
+				str_cat(path, command);
 			}
-			if (verify_command(info, pth))
-				return (pth);
+			if (verify_command(info, path))
+				return (path);
 			if (!pathstr[t])
 				break;
 			present_post = t;

@@ -36,7 +36,7 @@ ssize_t inst_buffer(info_t *info, char **buf, size_t *len)
 			createhist_list(info, *buf, info->count_hist++);
 			{
 				*len = q;
-				info->command_buff = buf;
+				info->cmd_buf = buf;
 			}
 		}
 	}
@@ -77,7 +77,7 @@ ssize_t inpt_ftch(info_t *info)
 		if (t >= len)
 		{
 			t = len = 0;
-			info->command_buff_type = CMD_NORM;
+			info->cmd_buf_type = CMD_NORM;
 		}
 
 		*buf_p = s;

@@ -119,10 +119,10 @@ int document_hist(info_t *info)
 }
 
 /**
- * get_history_file - obtain pth of the history file
+ * get_history_file - obtain path of the history file
  * @info: struct with info
  *
- * Return: string with a pth of the history file
+ * Return: string with a path of the history file
  */
 char *get_history_file(info_t *info)
 {
